@@ -53,7 +53,7 @@ def detect(net, img, device):
     if 0 == len(bboxlist):
         bboxlist = np.zeros((1, 5))
 
-    return bboxlist
+    return bboxlist, img, olist
 
 
 def flip_detect(net, img, device):
