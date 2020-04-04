@@ -28,7 +28,7 @@ def detect(net, img, device):
     BB, CC, HH, WW = img.size()
     with torch.no_grad():
         olist = net(img)
-
+    olist_ = olist.clone()
     bboxlist = []
     for i in range(len(olist) // 2):
         olist[i * 2] = F.softmax(olist[i * 2], dim=1)
@@ -53,7 +53,7 @@ def detect(net, img, device):
     if 0 == len(bboxlist):
         bboxlist = np.zeros((1, 5))
 
-    return bboxlist, img, olist
+    return bboxlist, img, olist_
 
 
 def flip_detect(net, img, device):
